@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+	"name": "Media Query Visualizer X",
+	"description": "Add media queries to the current page and see when they take effect!",
+	"version": "0.0.0",
+	"browser_action": {
+		"default_icon": "dist/icon.png",
+		"default_popup": "dist/popup.html"
+	},
+	"permissions": [
+		"activeTab"
+	],
+	"background": {
+		"scripts": [ "dist/js/background.js" ]
+	},
+	"content_scripts": [
+		{
+			"matches": [ "<all_urls>" ],
+			"js": [ "dist/js/content.js" ]
+		}
+	]
+}
