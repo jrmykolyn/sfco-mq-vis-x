@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Media Query Visualizer Popup</title>
+</head>
+<link rel="stylesheet" href="css/styles.css">
+<body>
+	<main>
+		<h1>Media Query Visualizer</h1>
+		<section>
+			<form action="#" method="POST">
+				<ul class="form-list">
+					<!-- WIDTH -->
+					<li class="form-list__item js--toggle-parent">
+						<div class="query-feature-wrap">
+							<h2>Width</h2>
+							<button class="js--toggle">+</button>
+						</div>
+						<div class="query-opts-wrap">
+							<div class="query-opts-wrap__opt">
+								<label for="">Min. Width</label>
+								<input type="text" name="min-width" placeholder="Min. Width">
+							</div>
+							<div class="query-opts-wrap__opt">
+								<label for="">Max. Width</label>
+								<input type="text" name="max-width" placeholder="Max. Width">
+							</div>
+						</div>
+					</li>
+					<!-- HEIGHT -->
+					<li class="form-list__item js--toggle-parent">
+						<div class="query-feature-wrap">
+							<h2>Width</h2>
+							<button class="js--toggle">+</button>
+						</div>
+						<div class="query-opts-wrap">
+							<div class="query-opts-wrap__opt">
+								<label for="">Min. Height</label>
+								<input type="text" name="min-height" placeholder="Min. height">
+							</div>
+							<div class="query-opts-wrap__opt">
+								<label for="">Max. Height</label>
+								<input type="text" name="max-height" placeholder="Max. Height">
+							</div>
+						</div>
+					</li>
+					<li>
+						<button id="submit">Submit</button>
+					</li>
+				</ul>
+			</form>
+		</section>
+	</main>
+	<script src="js/popup.js"></script>
+</body>
+</html>
