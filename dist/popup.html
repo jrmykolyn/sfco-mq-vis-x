@@ -3,50 +3,162 @@
 <head>
 	<title>Media Query Visualizer Popup</title>
 </head>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <body>
+	<header>
+		<h1 class="title">Media Query Visualizer</h1>
+	</header>
 	<main>
-		<h1>Media Query Visualizer</h1>
 		<section>
 			<form action="#" method="POST">
-				<ul class="form-list">
-					<!-- WIDTH -->
-					<li class="form-list__item js--toggle-parent">
-						<div class="query-feature-wrap">
-							<h2>Width</h2>
-							<button class="js--toggle">+</button>
-						</div>
-						<div class="query-opts-wrap">
-							<div class="query-opts-wrap__opt">
-								<label for="">Min. Width</label>
-								<input type="text" name="min-width" placeholder="Min. Width">
+				<div class="form-body">
+					<ul class="form-list">
+						<!-- WIDTH -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Width</h2>
+								<button class="js--toggle"></button>
 							</div>
-							<div class="query-opts-wrap__opt">
-								<label for="">Max. Width</label>
-								<input type="text" name="max-width" placeholder="Max. Width">
+							<div class="query-feature-options">
+								<div class="query-feature-desc">
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+									</p>
+								</div>
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Min. Width</label>
+										<input type="text" name="min-width" placeholder="Min. Width">
+									</div>
+									<div class="query-opts-wrap__opt">
+										<label for="">Max. Width</label>
+										<input type="text" name="max-width" placeholder="Max. Width">
+									</div>
+								</div>
 							</div>
-						</div>
-					</li>
-					<!-- HEIGHT -->
-					<li class="form-list__item js--toggle-parent">
-						<div class="query-feature-wrap">
-							<h2>Width</h2>
-							<button class="js--toggle">+</button>
-						</div>
-						<div class="query-opts-wrap">
-							<div class="query-opts-wrap__opt">
-								<label for="">Min. Height</label>
-								<input type="text" name="min-height" placeholder="Min. height">
+						</li>
+						<!-- HEIGHT -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Height</h2>
+								<button class="js--toggle"></button>
 							</div>
-							<div class="query-opts-wrap__opt">
-								<label for="">Max. Height</label>
-								<input type="text" name="max-height" placeholder="Max. Height">
+							<div class="query-feature-options">
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Min. Height</label>
+										<input type="text" name="min-height" placeholder="Min. height">
+									</div>
+									<div class="query-opts-wrap__opt">
+										<label for="">Max. Height</label>
+										<input type="text" name="max-height" placeholder="Max. Height">
+									</div>
+								</div>
 							</div>
+						</li>
+						<!-- ORIENTATION -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Orientation</h2>
+								<button class="js--toggle"></button>
+							</div>
+							<div class="query-feature-options">
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<input id="orientation_portrait" type="radio" name="orientation" value="portrait">
+										<label for="orientation_portrait">
+											<span class="cta-elem--radio"></span>
+											<span class="cta-text">Portrait</span>
+										</label>
+									</div>
+									<div class="query-opts-wrap__opt">
+										<input id="orientation_landscape" type="radio" name="orientation" value="landscape">
+										<label for="orientation_landscape">
+											<span class="cta-elem--radio"></span>
+											<span class="cta-text">Landscape</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- ASPECT RATIO -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Aspect Ratio</h2>
+								<button class="js--toggle"></button>
+							</div>
+							<div class="query-feature-options">
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Aspect Ratio</label>
+										<input type="text" name="aspect-ratio" placeholder="eg. 1/1">
+									</div>
+								</div>
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Min. Aspect Ratio</label>
+										<input type="text" name="min-aspect-ratio" placeholder="eg. 2/3">
+									</div>
+								</div>
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Aspect Ratio</label>
+										<input type="text" name="max-aspect-ratio" placeholder="eg. 3/2">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- RESOLUTION -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Resolution</h2>
+								<button class="js--toggle"></button>
+							</div>
+							<div class="query-feature-options">
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Resolution</label>
+										<input type="text" name="resolution" placeholder="eg. 2dppx">
+									</div>
+								</div>
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Min. Resolution</label>
+										<input type="text" name="min-resolution" placeholder="eg. 72dpi">
+									</div>
+								</div>
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Max. Resolution</label>
+										<input type="text" name="max-resolution" placeholder="eg. 300dpi">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- COLOUR -->
+						<li class="form-list__item js--toggle-parent">
+							<div class="query-feature-wrap">
+								<h2>Color</h2>
+								<button class="js--toggle"></button>
+							</div>
+							<div class="query-feature-options">
+								<div class="query-opts-wrap">
+									<div class="query-opts-wrap__opt">
+										<label for="">Color</label>
+										<input type="checkbox" name="color" value="color">
+									</div>
+									<div class="query-opts-wrap__opt">
+										<label for="">Monochrome</label>
+										<input type="checkbox" name="monochrome" value="monochrome">
+									</div>
+								</div>
+							</div>
+						</li>
 						</div>
-					</li>
-					<li>
-						<button id="submit">Submit</button>
-					</li>
+					<div class="form-footer">
+						<input id="submit" type="submit" />
+					</div>
 				</ul>
 			</form>
 		</section>
