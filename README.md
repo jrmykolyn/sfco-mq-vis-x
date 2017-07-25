@@ -26,6 +26,4 @@ Currently, Media Query Visualizer X does not include any external documentation.
 For an overview of the project's evolution, please consult the CHANGELOG.
 
 ## Roadmap
-- Update 'popup' form to support additional media query features (eg. `aspect-ratio`, `orientation`, etc.).
 - Update 'popup' form to support media query types (eg. `all`, `screen`, etc.).
-- Update 'popup' form to clear fields on submit.
