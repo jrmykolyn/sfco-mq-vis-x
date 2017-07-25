@@ -1,7 +1,592 @@
-*,
-*::before,
-*::after {
+/*
+@styleguide
+
+@title get (@function)
+
+Function is a wrapper around the native SASS `map-get` function.
+
+- @param {String} `$map` - *Target SASS map.*
+- @param {String} `$key` - *Target map key.*
+- @param {String} `$fallback` - *Value to return if target key does not yield a value.*
+- @return {Mixed}
+
+### Usage
+```
+// Input
+div {
+    display: get( $demoMap, display );
+}
+
+// Output
+div {
+    display: block;
+}
+
+
+// NOTE:
+// Example above assumes that `$demoMap` incudes a key of 'display', which in turn holds a value of 'block'.
+```
+```
+// Input
+div {
+    overflow: get( $demoMap, overflow, hidden );
+}
+
+// Output
+div {
+    overflow: hidden;
+}
+
+
+// NOTE:
+// Example above assumes that `$demoMap` DOES NOT include a key of 'display'. In this case, the fallback value ('hidden') is returned.
+```
+*/
+/*
+@styleguide
+
+@title getColor (@function)
+
+Function fetches the specified color from a 'set' of colors, defined on $colorMap.
+
+- @param {String} `$colorName` - *The color to fetch.*
+- @param {String} `$colorSet` - *The set/group of colors which contains `$colorName`.*
+- @return {String}
+
+### Usage
+```
+// Input
+p {
+    color: getColor( black );
+}
+
+// Output
+p {
+    color: #000;
+}
+
+
+// NOTE:
+// Example above assumes that $colorMap includes the key 'black', set to a value of #000.
+```
+```
+// Input
+h1 {
+    background-color: getColor( base, placeholder );
+}
+
+// Output
+h1 {
+    background-color: #FAFAFA;
+}
+
+// NOTE:
+// Example above assumes that $colorMap includes the $colorSet 'placeholder',
+// which in turn has a key called 'base' set to value of #FAFAFA.
+```
+*/
+/*
+@styleguide
+
+@title getFont (@function)
+
+Function fetches the specified font from a 'set' of fonts, defined on $fontMap.
+
+- @param {String} `$fontName` - *The font to fetch.*
+- @param {String} `$set` - *The set/group of fonts which contains `$fontName`.*
+- @return {String}
+
+### Usage
+```
+// Input
+body {
+    font-family: getFont( copy );
+}
+
+// Output
+body {
+    font-family: "Times New Roman", serif;
+}
+
+
+// NOTE:
+// Example above assumes that $fontMap includes the $set 'default',
+// which in turn has a key called 'copy' set to a value of "'Times New Roman', serif".
+```
+```
+// Input
+h1 {
+    font-family: getFont( primary, display );
+}
+
+// Output
+h1 {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+// NOTE:
+// Example above assumes that $fontMap includes the $set 'display',
+// which in turn has a key called 'primary' set to a value of "'Helvetica', 'Arial', serif".
+```
+*/
+/*
+@styleguide
+
+@title getPath (@function)
+
+TODO[@jrmykolyn] - Add description for `getPath()`.
+
+- @param {String} `$pathName`
+- @param {String} `$set`
+- @param {String}
+
+### Usage
+```
+// Input
+.icon--share {
+    background-image: url(getPath(images)/icon--share.png);
+}
+
+// Output
+.icon--share {
+    background-image: url(./assets/images/icon--share.png);
+}
+
+
+// NOTE:
+// Example above assumes that $pathMap includes the $set 'default',
+// which in turn has a key called `images` set to a value of `./assets/images`.
+```
+*/
+/*
+@styleguide
+
+@title getAspect (@function)
+
+Given a set of 2x numbers (`$dims`), function returns their relationship as either an integer or floating point number.
+
+- @param {String} `$dims` - Space-delimited set of dimensions. Function expects the *first number* to be the *width*, *second* to be the *height*.
+- @param {Boolean} `$returnHeightVal` - If set to `false`, function will return HEIGHT/WIDTH. Argument is set to `true` by default.
+- @return {Number}
+
+### Usage
+```
+// Input
+div {
+    width: 100%;
+    height: getAspect( 16 9, false )*100%;
+}
+
+// Output
+div {
+    width: 100%;
+    height: 56.25%;
+}
+```
+```
+// Input
+span:before {
+    content: "500 is getAspect(500 200) times greater than 200."
+}
+
+// Output
+span:before {
+    content: "500 is 2.5 times greater than 200.";
+}
+```
+*/
+/*
+@styleguide
+
+@title applyAspect (@function)
+
+Given a set of 2x numbers (`$dims`) and a value (`$value`), function applies the aspect ratio to the value and returns the result.
+
+- @param {String} `$dims` - *Space-delimited set of dimensions. Function expects the first number to be the width, second to be the height.*
+- @param {String|Number} `$value` - *Value against which the aspect ratio will be applied. Defaults to '100%' if no argument is provided.*
+- @return {Number}
+
+### Usage
+```
+// Input
+div {
+    width: applyAspect( 3 4 );
+    height: applyAspect( 2 3, 600px );
+}
+
+// Output
+div {
+    width: 75%;
+    height: 400px;
+}
+```
+*/
+/*
+@styleguide
+
+@title on (@mixin)
+
+For each valid 'state' (eg. pseduo-selector) received via the `$states` argument,
+mixin wraps the provided `@content` declarations in a new CSS rule.
+Note that the mixin validates each 'state' against an internally defined whitelist.
+
+- @param {String} `$states` - The list of 'states' for which to apply the provided styles
+
+### Usage
+```
+// Input
+a {
+    @include on( hover ) { background: red; }
+}
+
+// Output
+a:hover {
+    background: red;
+}
+```
+```
+// Input
+a {
+    @include on( focus active ) { margin-right: 10px; }
+}
+
+// Output
+a:focus,
+a:active {
+    margin-right: 10px;
+}
+```
+*/
+/*
+@styleguide
+
+@title set (@mixin)
+
+Mixin creates 1x declaration for each item in a list of properties (`$props`).
+The value of each declaration is set to `$value`.
+
+- @param {String} `$props`
+- @param {String|Number} `$value`
+
+### Usage
+```
+// Input
+p {
+    @include set( margin padding, 0 );
+}
+
+// Output
+p {
+    margin: 0;
+    padding: 0;
+}
+```
+```
+// Input
+img {
+    @include set( min-height max-height, 100% );
+}
+
+// Output
+img {
+    min-height: 100%;
+    max-height: 100%;
+}
+```
+*/
+/*
+@styleguide
+
+@title pseudo (@mixin)
+
+For each valid pseudo element received via the `$elements` argument,
+mixin wraps the provided `@content` declarations in a new CSS rule.
+Note that the mixin validates each 'element' against an internally defined whitelist.
+
+- @param {String} `$elements`
+
+### Usage
+```
+// Input
+div {
+    @include pseudo( before ) {
+        content: 'This is my before element content';
+        display: block;
+        color: white;
+        background-color: black;
+    }
+}
+
+// Output
+div::before {
+    content: 'This is my before element content';
+    display: block;
+    color: white;
+    background-color: black;
+}
+```
+*/
+/*
+@styleguide
+
+@title descendant (@mixin)
+
+For each valid 'descendant keyword' received via the `$descendants` argument,
+mixin wraps the provided `@content` declarations in a new CSS rule.
+Note that the mixin validates each 'descendant keyword' against an internally defined whitelist.
+
+- @param {String} `$descendants`
+
+### Usage
+```
+// Input
+section {
+    @include descendant( first last ) {
+        color: blue;
+        margin-bottom: 30px;
+    }
+}
+
+// Output
+section > *:first-child,
+section > *:last-child, {
+    color: blue;
+    margin-bottom: 30px;
+}
+```
+*/
+/*
+@styleguide
+
+@title parent (@mixin)
+
+Mixin allows for the building of rules based on the parent of the current selector.
+By default, including the `parent` mixin with no arguments will result in a new rule, with `* >` prepended to the current selector.
+If the mixin is called with 1x argument, the '*' will be replaced with the value provided.
+If the mixin is called with 2x arguments, the second value will be appended to the first (eg. {TYPE}{MODIFIER}).
+
+- @param {String} `$type`
+- @param {String} `$modifier`
+
+### Usage
+```
+// Input
+section {
+    @include parent {
+        background-color: grey;
+    }
+}
+
+// Output
+* > section {
+    background-color: grey;
+}
+```
+```
+// Input
+p {
+    @include parent( li ) {
+        text-decoration: underline;
+    }
+}
+
+// Output
+li > p {
+    text-decoration: underline;
+}
+```
+```
+// Input
+li {
+    @include parent( ul, '.is-active' ) {
+        font-weight: 700;
+    }
+}
+
+// Output
+ul.is-active li {
+    font-weight: 700;
+}
+```
+*/
+/*
+@styleguide
+
+@title max-size (@mixin)
+
+Mixin allows for quick setting of the `max-width` and `max-height` properties on a given element.
+
+If the list argument contains 1x item: both properties will be set to the provided value.
+
+If the list argument contains 2x or more items: `max-width` will be set equal to the first value; `max-height` will be set equal to the second value
+
+- @param {String} `$maxDims` - A list of values
+
+### Usage
+```
+// Input
+div {
+    @include max-size( 50% );
+}
+
+// Output
+div {
+    max-width: 50%;
+    max-height: 50%;
+}
+```
+```
+// Input
+div {
+    @include max-size( 100% 400px );
+}
+
+// Output
+div {
+    max-width: 100%;
+    max-height: 400px;
+}
+```
+*/
+/*
+@styleguide
+
+@title min-size (@mixin)
+
+Mixin allows for quick setting of the `min-width` and `min-height` properties on a given element.
+
+If the list argument contains 1x item: both properties will be set to the provided value.
+
+If the list arguments contains 2x or more items: `max-width` will be set equal to the first value; `max-height` will be set equal to the second value
+
+- @param {String} `$minDims` - A list of values
+
+### Usage
+```
+// Input
+div {
+    @include min-size( 200px );
+}
+
+// Output
+div {
+    min-width: 200px;
+    min-height: 200px;
+}
+```
+```
+// Input
+div {
+    @include min-size( 25% 600px );
+}
+
+// Output
+div {
+    min-width: 25%;
+    min-height: 600px;
+}
+```
+*/
+/*
+@styleguide
+
+@title print-map (@mixin)
+
+Given a map, mixin prints 1x declaration for every key/value pair. NOTE: Mixin DOES NOT support nested maps.
+
+- @param {Map} `$map`
+
+### Usage
+```
+// Input
+p {
+    @include print-map( $fontStylesMap );
+}
+
+// Output
+p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+// NOTE:
+// Example above assumes that $fontStylesMap includes the following keys: `font-size`; `font-weight`; `text-transform`.
+```
+*/
+/*
+@styleguide
+
+@title dims (@mixin)
+
+Mixin allows for quick setting of the `width` and `height` properties on a given element.
+
+If the list argument contains 1x item: both properties will be set to the provided value.
+
+If the list argument contains 2x or more items: `width` will be set equal to the first value; `height` will be set equal to the second value
+
+In the case where 2x values are provided, `null` will be ignored.
+
+NOTE: Mixin is a port of the Bourbon library's 'size', which is currently throwing deprecation warnings.
+
+- @param {String} `$dims` - A list of values
+
+### Usage
+```
+// Input
+.my-elem {
+    @include dims( 100px );
+}
+
+
+// Output
+.my-elem {
+    width: 100px;
+    height: 100px;
+}
+```
+```
+// Input
+.row {
+    @include dims( 100% 200px );
+}
+
+// Output
+.row {
+    width: 100%;
+    height: 200px;
+}
+```
+```
+// Input
+section {
+    @include dims( 100% null );
+}
+
+// Output
+section {
+    width: 100%;
+}
+```
+```
+// Input
+.overlay {
+    @include dims( null 100% );
+}
+
+// Output
+.overlay {
+    height: 100%;
+}
+```
+*/
+* {
   box-sizing: border-box; }
+  *::before {
+    box-sizing: border-box; }
+  *::after {
+    box-sizing: border-box; }
 
 html,
 body {
@@ -94,6 +679,8 @@ ul {
   padding: 1rem 1.5rem;
   cursor: pointer;
   transition: color 0.2s; }
+  .query-feature-wrap > * {
+    pointer-events: none; }
   .query-feature-wrap h2 {
     font-size: 1em;
     font-weight: 700; }
@@ -103,11 +690,12 @@ ul {
     display: block;
     background: transparent;
     border: 0.2rem solid #2c3e50;
-    position: relative;
-    pointer-events: none; }
-    .query-feature-wrap button:before, .query-feature-wrap button::before, .query-feature-wrap button:after, .query-feature-wrap button::after {
+    position: relative; }
+    .query-feature-wrap button::before {
       transition: all 0.125s; }
-    .query-feature-wrap button:before, .query-feature-wrap button::before {
+    .query-feature-wrap button::after {
+      transition: all 0.125s; }
+    .query-feature-wrap button::before {
       content: '';
       width: 1rem;
       height: 0.2rem;
@@ -117,7 +705,7 @@ ul {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); }
-    .query-feature-wrap button:after, .query-feature-wrap button::after {
+    .query-feature-wrap button::after {
       content: '';
       width: 0.2rem;
       height: 1rem;
@@ -127,7 +715,7 @@ ul {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); }
-      .is-active .query-feature-wrap button:after, .is-active .query-feature-wrap button::after {
+      .is-active .query-feature-wrap button::after {
         transform: translate(-50%, -50%) rotate(90deg); }
 
 .query-feature-options {
@@ -182,8 +770,8 @@ input[type="checkbox"] {
   input[type="radio"] + label .cta-text,
   input[type="checkbox"] + label .cta-text {
     line-height: 1.5rem; }
-  input[type="radio"]:checked + label .cta-elem--radio:after,
-  input[type="checkbox"]:checked + label .cta-elem--radio:after {
+  input[type="radio"]:checked + label .cta-elem--radio::after,
+  input[type="checkbox"]:checked + label .cta-elem--radio::after {
     content: '';
     width: 50%;
     height: 50%;
@@ -198,7 +786,7 @@ input[type="checkbox"] {
 input[type="checkbox"] + label .cta-elem--radio {
   border-radius: 0; }
 
-input[type="checkbox"]:checked + label .cta-elem--radio:before, input[type="checkbox"]:checked + label .cta-elem--radio:after {
+input[type="checkbox"]:checked + label .cta-elem--radio::before {
   content: '';
   width: 80%;
   height: 0.2rem;
@@ -208,10 +796,20 @@ input[type="checkbox"]:checked + label .cta-elem--radio:before, input[type="chec
   top: 50%;
   left: 50%; }
 
-input[type="checkbox"]:checked + label .cta-elem--radio:before {
+input[type="checkbox"]:checked + label .cta-elem--radio::after {
+  content: '';
+  width: 80%;
+  height: 0.2rem;
+  display: block;
+  background: #222;
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
+input[type="checkbox"]:checked + label .cta-elem--radio::before {
   transform: translate(-50%, -50%) rotate(45deg); }
 
-input[type="checkbox"]:checked + label .cta-elem--radio:after {
+input[type="checkbox"]:checked + label .cta-elem--radio::after {
   transform: translate(-50%, -50%) rotate(135deg); }
 
 input[type="submit"] {
@@ -228,6 +826,7 @@ input[type="submit"] {
   font-size: 1.4rem;
   letter-spacing: 0.05rem;
   line-height: 4rem;
-  text-align: center; }
+  text-align: center;
+  cursor: pointer; }
   input[type="submit"]:hover, input[type="submit"]:focus {
     background: #1a252f; }
