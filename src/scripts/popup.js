@@ -31,7 +31,7 @@ window.addEventListener( 'click', function( e ) {
 	if ( e.target.classList.contains( 'js--toggle' ) ) {
 		e.preventDefault();
 
-		let toggleParent = e.target.parentNode.parentNode; /// FIXME[@jrmykolyn] - Too brittle.
+		let toggleParent = e.target.parentNode; /// FIXME[@jrmykolyn] - Too brittle.
 
 		if ( toggleParent ) {
 			( toggleParent.classList.contains( 'is-active' ) ) ? toggleParent.classList.remove( 'is-active') : toggleParent.classList.add( 'is-active' );
