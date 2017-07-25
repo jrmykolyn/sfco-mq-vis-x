@@ -31,7 +31,11 @@ gulp.task( 'scripts', function() {
 
 gulp.task( 'styles', function() {
 	return gulp.src( `${PATHS.srcStyles}/styles.scss` )
-		.pipe( sass() )
+		.pipe( sass( {
+			includePaths: [
+				'./node_modules/sfco-sass-utils'
+			],
+		} ) )
 		.pipe( gulp.dest( PATHS.distCss ) );
 } );
 
