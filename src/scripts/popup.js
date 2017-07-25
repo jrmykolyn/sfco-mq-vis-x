@@ -31,7 +31,7 @@ window.addEventListener( 'click', function( e ) {
 	if ( e.target.classList.contains( 'js--toggle' ) ) {
 		e.preventDefault();
 
-		let toggleParent = e.target.parentNode; /// FIXME[@jrmykolyn] - Too brittle.
+		let toggleParent = e.target.parentNode;
 
 		if ( toggleParent ) {
 			( toggleParent.classList.contains( 'is-active' ) ) ? toggleParent.classList.remove( 'is-active') : toggleParent.classList.add( 'is-active' );
@@ -42,7 +42,7 @@ window.addEventListener( 'click', function( e ) {
 formElem.addEventListener( 'submit', function( e ) {
 	e.preventDefault();
 
-	var formData = new FormData( e.target ); /// TEMP
+	var formData = new FormData( e.target );
 	var entries = formData.entries();
 	var query = {
 		type: 'all',
@@ -56,6 +56,9 @@ formElem.addEventListener( 'submit', function( e ) {
 			query.features.push( { key, value } );
 		}
 	}
+
+	// Reset inputs.
+	e.target.reset();
 
 	send( { msg: 'UPDATE', queries: [ query ] } );
 } );
