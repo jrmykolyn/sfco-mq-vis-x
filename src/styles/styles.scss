@@ -1,10 +1,12 @@
 // VENDOR
-// @import 'sfco-sass-utils';
+@import 'sfco-sass-utils';
 
-*,
-*::before,
-*::after {
+* {
 	box-sizing: border-box;
+
+	@include pseudo( before after ) {
+		box-sizing: border-box;
+	}
 }
 
 html,
@@ -132,6 +134,12 @@ ul {
 		 /// TODO
 	}
 
+	// Descendent elems.
+	> * {
+		// All 'click through' on all child elems.
+		pointer-events: none;
+	}
+
 	h2 {
 		font-size: 1em;
 		font-weight: 700;
@@ -145,17 +153,13 @@ ul {
 		background: transparent;
 		border: 0.2rem solid #2c3e50;
 		position: relative;
-		pointer-events: none;
 
-		&:before,
-		&::before,
-		&:after,
-		&::after {
+		// Pseudo elems.
+		@include pseudo( before after ) {
 			transition: all 0.125s;
 		}
 
-		&:before,
-		&::before {
+		@include pseudo( before ) {
 			content: '';
 			width: 1rem;
 			height: 0.2rem;
@@ -167,8 +171,7 @@ ul {
 			transform: translate( -50%, -50% );
 		}
 
-		&:after,
-		&::after  {
+		@include pseudo( after ) {
 			content: '';
 			width: 0.2rem;
 			height: 1rem;
@@ -262,7 +265,7 @@ input[type="checkbox"] {
 
 	&:checked + label {
 		.cta-elem--radio {
-			&:after {
+			@include pseudo( after ) {
 				content: '';
 				width: 50%;
 				height: 50%;
@@ -287,8 +290,7 @@ input[type="checkbox"] {
 
 	&:checked + label {
 		.cta-elem--radio {
-			&:before,
-			&:after {
+			@include pseudo( before after ) {
 				content: '';
 				width: 80%;
 				height: 0.2rem;
@@ -299,11 +301,11 @@ input[type="checkbox"] {
 				left: 50%;
 			}
 
-			&:before {
+			@include pseudo( before ) {
 				transform: translate( -50%, -50% ) rotate( 45deg );
 			}
 
-			&:after {
+			@include pseudo( after ) {
 				transform: translate( -50%, -50% ) rotate( 135deg );
 			}
 		}
@@ -325,10 +327,10 @@ input[type="submit"] {
 	letter-spacing: 0.05rem;
 	line-height: 4rem;
 	text-align: center;
+	cursor: pointer;
 
 	&:hover,
 	&:focus {
 		background: darken( #2c3e50, 10% );
-		// background: red;
 	}
 }
