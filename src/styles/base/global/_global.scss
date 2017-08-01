@@ -106,7 +106,7 @@ ul {
 }
 
 .form-footer {
-	padding: 2rem 0;
+	padding: 2rem;
 	position: relative;
 	box-shadow: 0 0 1rem 0.3rem rgba( 0, 0, 0, 0.075 );
 }
@@ -348,5 +348,23 @@ input[type="submit"] {
 	&:hover,
 	&:focus {
 		background: darken( #2c3e50, 10% );
+	}
+}
+
+.status-wrapper {
+	margin-bottom: 1.8rem;
+	text-align: center;
+	font-size: 1.2rem; /* 12px / 10px = 1.2rem */
+
+	> * {
+		margin: 0;
+	}
+
+	p {
+		display: block;
+
+		&:not( :last-child ) {
+			margin-bottom: 1.5em; /* 18px / 12px = 1.5em */
+		}
 	}
 }
